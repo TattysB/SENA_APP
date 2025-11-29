@@ -1,0 +1,155 @@
+{% load static %}
+{% load bootstrap5 %}
+<!doctype html>
+<html lang="es">
+
+<link rel="stylesheet" href="{% static 'mystyles.css' %}">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}SENA APP{% endblock %}</title>
+    {% bootstrap_css %}
+
+
+    {% bootstrap_javascript %}
+  </head>
+
+  <nav class="navbar navbar-expand-lg navbar-custom sticky-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+      <img src="{% static 'aprendices/logo.png' %}" alt="SENA" class="brand-logo" />
+      <div class="brand-text">
+        <span class="brand-title">SENA APP</span>
+        <small class="brand-sub">Portal institucional</small>
+      </div>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+      aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon custom-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-2">
+        <li class="nav-item"><a class="nav-link active" href="/">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="/aprendices/">Aprendices</a></li>
+        <li class="nav-item"><a class="nav-link" href="/instructores/">Instructores</a></li>
+
+        <!-- Search (esconde en móvil) -->
+        <li class="nav-item d-none d-lg-flex align-items-center ms-3">
+          <form class="d-flex search-pill" role="search" method="get" action="/search/">
+            <input class="form-control form-control-sm search-input" name="q" type="search" placeholder="Buscar aprendices, cursos..." aria-label="Buscar">
+            <button class="btn btn-sm search-btn" type="submit" aria-label="Buscar"><i class="bi bi-search"></i></button>
+          </form>
+        </li>
+
+        <!-- Perfil / dropdown -->
+        <li class="nav-item dropdown ms-3">
+          <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" id="userMenu" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="avatar-sm" aria-hidden="true"><img src="{% static 'aprendices/perfil.png' %}" alt="SENA" height="46"></div>
+            <span class="d-none d-lg-inline">Perfil</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userMenu">
+            <li><a class="dropdown-item" href="/admin/">Admin</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/accounts/logout/">Cerrar sesión</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- Mobile search (visible solo en colapsado) -->
+      <form class="d-flex mt-3 d-lg-none w-100" role="search" method="get" action="/search/">
+        <input class="form-control form-control-sm me-2" name="q" type="search" placeholder="Buscar..." aria-label="Buscar">
+        <button class="btn btn-sm btn-light" type="submit">Buscar</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+    <!-- Main content area -->
+    <main >
+      {% block content %}
+      
+      {% endblock %}
+    </main>
+
+  <footer class="footer-modern" role="contentinfo" aria-label="Pie de página SENA APP">
+  <div class="container py-5">
+    <div class="row g-4">
+
+      <!-- LOGO -->
+      <div class="col-md-4 text-center text-md-start">
+        <img src="{% static 'aprendices/logo.png' %}" alt="Logo SENA" class="footer-logo mb-3">
+        <p class="footer-desc">
+          Plataforma institucional donde aprendices e instructores pueden gestionar recursos, servicios y herramientas de formación.
+        </p>
+      </div>
+
+      <!-- Institucional -->
+      <div class="col-md-2 text-center text-md-start">
+        <h6 class="footer-title">Institucional</h6>
+        <ul class="list-unstyled footer-links">
+          <li><a href="/oferta/">Oferta académica</a></li>
+          <li><a href="/sedes/">Sedes</a></li>
+          <li><a href="/convocatorias/">Convocatorias</a></li>
+          <li><a href="/noticias/">Noticias</a></li>
+        </ul>
+      </div>
+
+      <!-- Servicios -->
+      <div class="col-md-3 text-center text-md-start">
+        <h6 class="footer-title">Servicios</h6>
+        <ul class="list-unstyled footer-links">
+          <li><a href="/soporte/">Soporte técnico</a></li>
+          <li><a href="/calendario/">Calendario académico</a></li>
+          <li><a href="/reportes/">Reportes y estadísticas</a></li>
+          <li><a href="/preguntas-frecuentes/">Preguntas frecuentes</a></li>
+        </ul>
+      </div>
+
+      <!-- Contacto -->
+      <div class="col-md-3 text-center text-md-start">
+        <h6 class="footer-title">Contacto</h6>
+        <p class="footer-contact"><strong>Email: </strong><a href="mailto:contacto@sena.edu.co">contacto@sena.edu.co</a></p>
+        <p class="footer-contact"><strong>Teléfono: </strong><a href="tel:+573100000000">+57 310 000 0000</a></p>
+        <p class="footer-contact small"><strong>Dirección:</strong> Cra. 50 #26-56, Bogotá D.C.</p>
+
+        <!-- Redes sociales con íconos -->
+        <div class="social-container mt-3">
+         
+          <a href="#" class="social-btn" aria-label="Facebook"><i class="bi bi-facebook"><img src="{% static 'aprendices/facebook.png' %}" alt="SENA" height="46"></i></a>
+          <a href="#" class="social-btn" aria-label="Twitter"><i class="bi bi-twitter"><img src="{% static 'aprendices/twiter.png' %}" alt="SENA" height="46"></i></a>
+          <a href="#" class="social-btn" aria-label="YouTube"><i class="bi bi-youtube"><img src="{% static 'aprendices/youtube.png' %}" alt="SENA" height="46"></i></a>
+          <a href="#" class="social-btn" aria-label="Instagram"><i class="bi bi-instagram"><img src="{% static 'aprendices/instagram.png' %}" alt="SENA" height="46"></i></a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Línea inferior -->
+    <div class="footer-bottom mt-4 pt-3 border-top d-flex flex-column flex-md-row justify-content-between align-items-center text-center text-md-start">
+      <p class="small mb-1 mb-md-0 text-muted">© 2025 SENA APP — Desarrollado por Aprendices ADSO</p>
+      <div class="d-flex gap-3">
+        <a href="/politicas/" class="footer-bottom-link">Políticas</a>
+        <a href="/terminos/" class="footer-bottom-link">Términos</a>
+        <a href="/accesibilidad/" class="footer-bottom-link">Accesibilidad</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón volver arriba -->
+  <button id="backToTop" class="back-to-top" aria-label="Volver arriba" title="Volver arriba">
+    <i class="bi bi-arrow-up-short"></i>
+  </button>
+</footer>
+
+
+
+
+
+
+  </body>
+</html>

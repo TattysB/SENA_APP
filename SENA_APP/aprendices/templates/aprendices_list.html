@@ -1,0 +1,83 @@
+{% extends 'master.html' %} {% block title %}Lista de Aprendices{% endblock %}
+{% block content %}
+{% load static %}
+<div class="row mt-4">
+  <div class="col-12">
+    <link rel="stylesheet" href="{% static 'mystyles.css' %}" />
+    <!-- Título moderno -->
+    <div class="section-header mb-4">
+      <h2 class="section-title">
+        <i class="bi bi-people-fill me-2"></i> Lista de Aprendices
+      </h2>
+      <p class="section-sub">
+        Consulta rápida y organizada de los aprendices registrados.
+      </p>
+    </div>
+
+    <!-- TABLA (pantallas grandes) -->
+    <div class="table-responsive d-none d-md-block">
+      <table class="table table-modern table-hover align-middle">
+        <thead>
+          <tr>
+            <th>Documento</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Programa</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for aprendiz in aprendices %}
+          <tr>
+            <td>
+              <a
+                class="table-link"
+                href="{% url 'detalle_aprendiz' aprendiz.id %}"
+              >
+                {{ aprendiz.document_id }}
+              </a>
+            </td>
+            <td>{{ aprendiz.firstname }}</td>
+            <td>{{ aprendiz.lastname }}</td>
+            <td>{{ aprendiz.program }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="4" class="text-center no-data">
+              No hay aprendices registrados.
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- CARDS (móviles) -->
+    <div class="d-block d-md-none mt-3">
+      {% if aprendices %}
+      <div class="card-grid">
+        {% for aprendiz in aprendices %}
+        <div class="apprentice-card">
+          <div class="card-header-row">
+            <span class="student-icon"><i class="bi bi-person-badge"></i></span>
+            <a href="{% url 'detalle_aprendiz' aprendiz.id %}" class="doc-link">
+              {{ aprendiz.document_id }}
+            </a>
+          </div>
+
+          <div class="card-title">
+            {{ aprendiz.firstname }} {{ aprendiz.lastname }}
+          </div>
+
+          <div class="card-program">
+            <i class="bi bi-journal-code me-1"></i> {{ aprendiz.program }}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <div class="no-data text-center">No hay aprendices registrados.</div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

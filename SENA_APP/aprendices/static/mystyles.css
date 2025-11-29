@@ -1,0 +1,604 @@
+
+      :root{
+        --sena-green-1: #006a39; /* color principal SENA */
+        --sena-green-2: #02a65a; /* acento */
+        --sena-dark: #052017;
+        --text-light: #f7faf7;
+      }
+
+     /* NAVBAR moderno SENA */
+.navbar-custom{
+  background: linear-gradient(90deg, rgba(0,106,57,0.98), rgba(2,166,90,0.94));
+  padding: .9rem 0;
+  min-height: 74px;
+  transition: padding .22s ease, box-shadow .22s ease;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* Más grande en pantallas grandes */
+@media (min-width:992px){
+  .navbar-custom{ padding: 1.05rem 0; min-height: 84px; }
+}
+
+/* Brand */
+.brand-logo{
+  height:48px;
+  width:auto;
+  border-radius:8px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+}
+.brand-text{ line-height:1; color: #ffffff; }
+.brand-title{ font-weight:800; font-size:1.05rem; letter-spacing:.02em; color:#fff; display:block; }
+.brand-sub{ font-size:0.72rem; opacity:0.92; color: rgba(255,255,255,0.9); }
+
+/* Navbar links */
+.navbar-custom .nav-link{
+  color: rgba(255,255,255,0.95);
+  font-weight:600;
+  padding: .5rem .65rem;
+  transition: color .15s ease, transform .12s ease;
+}
+.navbar-custom .nav-link:hover{
+  color: #e9f9ee;
+  transform: translateY(-2px);
+}
+.navbar-custom .nav-link.active{
+  position: relative;
+  color:#fff;
+}
+.navbar-custom .nav-link.active::after{
+  content:'';
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:-8px;
+  width:48%;
+  height:3px;
+  background: rgba(255,255,255,0.95);
+  border-radius:3px;
+}
+
+/* Toggler custom */
+.navbar-toggler{
+  border: 0;
+  width:44px;
+  height:44px;
+  background: rgba(255,255,255,0.06);
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.navbar-toggler:focus{ box-shadow: 0 6px 18px rgba(2,80,40,0.16); }
+.custom-toggler-icon{
+  display:inline-block;
+  width:22px;
+  height:2px;
+  background: #fff;
+  position:relative;
+}
+.custom-toggler-icon::before,
+.custom-toggler-icon::after{
+  content:'';
+  position:absolute;
+  left:0;
+  width:22px;
+  height:2px;
+  background:#fff;
+}
+.custom-toggler-icon::before{ top:-6px; }
+.custom-toggler-icon::after{ top:6px; }
+
+/* Avatar pequeño en menú */
+.avatar-sm{
+  width:36px;
+  height:36px;
+  border-radius:9px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(255,255,255,0.12);
+  color:#fff;
+  font-size:1.05rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+}
+
+/* Search pill */
+.search-pill{
+  display:inline-flex;
+  align-items:center;
+  background: rgba(255,255,255,0.08);
+  padding: 4px;
+  border-radius: 999px;
+  gap:6px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.search-input{
+  width:260px;
+  background: transparent;
+  border: 0;
+  color: #fff;
+  padding: .5rem .6rem;
+  outline: none;
+  box-shadow: none;
+}
+.search-input::placeholder{ color: rgba(255,255,255,0.75); font-weight:600; }
+.search-btn{
+  background: rgba(255,255,255,0.95);
+  color: var(--bs-body-color);
+  border-radius: 999px;
+  padding: .35rem .6rem;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* Dropdown menu personalizado */
+.dropdown-menu{
+  border-radius: 12px;
+  border: 0;
+  min-width: 200px;
+  background: #ffffff;
+}
+.dropdown-item{ color: #0b2b21; }
+.dropdown-menu .dropdown-divider{ border-top: 1px solid rgba(3,80,40,0.06); }
+
+/* Sombra y elevación al hacer scroll (opcional) */
+.sticky-top.scrolled .navbar-custom{
+  box-shadow: 0 6px 20px rgba(3,80,40,0.12);
+}
+
+/* Ajustes responsive */
+@media (max-width:991.98px){
+  .brand-sub{ display:none; }
+  .search-input{ width:160px; }
+  .nav-link{ padding:.4rem .45rem; }
+}
+
+/* ---------- HERO ---------- */
+.hero-modern{
+  position: relative;
+  overflow: hidden;
+  min-height: 60vh;
+  display:flex;
+  align-items:center;
+  padding: 3.5rem 0;
+}
+
+/* imagen de fondo: aumento del tamaño para que se vea más grande en el centro */
+.hero-bg{
+  position:absolute;
+  inset:0;
+  background-size: cover;
+  background-repeat:no-repeat;
+  /* Ajusta verticalmente para centrar la cara: cambia 30% si necesitas mover arriba/abajo */
+  background-position: center 30%;
+  transform: scale(1.16);              /* imagen más grande */
+  filter: blur(4px) brightness(0.74);
+  transition: transform 0.8s cubic-bezier(.2,.9,.2,1), filter 0.5s;
+  z-index:0;
+}
+
+/* al pasar el cursor por el hero, hace un ligero zoom (opcional y atractivo) */
+.hero-modern:hover .hero-bg{
+  transform: scale(1.22);
+  filter: blur(3px) brightness(0.78);
+}
+
+/* overlay para reducir verde y mejorar contraste */
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background: linear-gradient(180deg, rgba(4,38,24,0.28), rgba(2,166,90,0.12));
+  z-index:1;
+}
+
+/* contenido encima */
+.hero-modern .hero-content{
+  position:relative;
+  z-index:2;
+  color:#ffffff;
+  text-align:center;
+  padding: 0 1rem;
+}
+
+/* Eyebrow */
+.eyebrow{
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color: rgba(255,255,255,0.92);
+  margin-bottom: .4rem;
+}
+
+/* Título / acento */
+.hero-title{
+  font-size: clamp(1.9rem, 4vw, 3.4rem);
+  font-weight:800;
+  margin-bottom: .5rem;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+.hero-title .accent{
+  display:inline-block;
+  padding: .12rem .4rem;
+  border-radius:8px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+}
+
+/* subtítulo */
+.hero-sub{ max-width:720px; margin:0 auto; opacity:.95; font-size:1.05rem; }
+
+/* Botón principal: gradiente más brillante */
+.btn-cta{
+  background: linear-gradient(90deg, #005a34, #02c36a); /* cambia aquí los hex */
+  color: #ffffff;
+  font-weight:700;
+  padding: .9rem 1.6rem;
+  box-shadow: 0 18px 40px rgba(0,80,40,0.14);
+  border: none;
+  transition: transform .18s ease, box-shadow .18s ease, filter .15s;
+  backdrop-filter: blur(0.5px);
+}
+.btn-cta:hover{
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 30px 70px rgba(0,90,40,0.18);
+  filter: brightness(1.03);
+}
+
+/* Botón secundario: outline con color SENA */
+.btn-cta-outline{
+  background: transparent;
+  color: #eaf6ee;
+  border: 2px solid rgba(234,246,238,0.22);
+  padding: .78rem 1.4rem;
+  font-weight:700;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s;
+}
+.btn-cta-outline:hover{
+  transform: translateY(-6px);
+  background: rgba(255,255,255,0.06);
+  color: #ffffff;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+}
+
+/* estilo base */
+.feature{
+  border-radius:12px;
+  border: 0;
+  overflow: hidden;
+  transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s;
+  box-shadow: 0 10px 28px rgba(2,80,40,0.06);
+  background: #fff;
+}
+
+/* animación de entrada (sutil) */
+@keyframes enterUp {
+  from{ opacity:0; transform: translateY(18px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+.feature{ opacity:0; animation: enterUp .6s forwards; }
+
+/* escalonar la animación por columna */
+.features .col-md-4:nth-child(1) .feature{ animation-delay: .05s; }
+.features .col-md-4:nth-child(2) .feature{ animation-delay: .14s; }
+.features .col-md-4:nth-child(3) .feature{ animation-delay: .24s; }
+
+/* hover: elevación y sombra más marcada */
+.feature:hover{
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 30px 70px rgba(3,80,40,0.14);
+}
+
+/* contenido de la card */
+.feature .card-body{ padding: 1.4rem; }
+.feature .card-title{ color: var(--sena-dark); font-weight:800; margin-bottom:.5rem; }
+.feature .card-text{ color:#374b41; margin-bottom: .8rem; }
+.link-more{ color: var(--sena-1); font-weight:700; text-decoration:none; }
+.link-more:hover{ text-decoration: underline; }
+
+/* ---------- LISTA DE APRENDICES ---------- */
+.aprendices-list{ list-style:none; padding-left:0; margin:0; }
+.badge-aprendiz{
+  display:inline-block; margin:.3rem .25rem;
+  padding:.45rem .75rem;
+  background: linear-gradient(90deg, rgba(2,166,90,0.12), rgba(0,106,57,0.06));
+  color: var(--sena-dark);
+  font-weight:700; border-radius:999px;
+  box-shadow: 0 8px 18px rgba(2,80,40,0.05);
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 767px){
+  .hero-modern{ min-height: 44vh; padding:2.5rem 0; }
+  .hero-bg{ transform: scale(1.12); background-position: center 28%; filter: blur(3px) brightness(0.7); }
+  .hero-title{ font-size:1.6rem; }
+  .btn-cta, .btn-cta-outline{ padding: .7rem 1.2rem; font-size:.95rem; }
+  .features .card{ min-height: 120px; }
+}
+
+
+/* Ajustes responsivos */
+@media (max-width: 575.98px){
+  .info-list strong{ width: 110px; display:block; margin-bottom: 0.25rem; }
+  .avatar{ width:60px; height:60px; font-size:1rem; }
+}
+
+/* Paleta SENA */
+:root {
+  --sena-green: #006a39;
+  --sena-green-light: #02a65a;
+  --footer-bg: #003521;
+  --footer-text: #d6f5e4;
+}
+
+.footer-modern {
+  background: linear-gradient(180deg, var(--footer-bg), #002a1c );
+  color: var(--footer-text);
+  padding-bottom: 3rem;
+}
+
+/* Logo */
+.footer-logo {
+  width: 85px;
+  filter: drop-shadow(0px 4px 8px rgba(0,0,0,.45));
+}
+
+.footer-desc {
+  font-size: .9rem;
+  opacity: .8;
+  line-height: 1.5;
+}
+
+/* Títulos */
+.footer-title {
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: .6rem;
+}
+
+/* Enlaces */
+.footer-links li {
+  margin-bottom: .35rem;
+}
+
+.footer-links a {
+  color: var(--footer-text);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color .2s ease, padding-left .2s ease;
+}
+
+.footer-links a:hover {
+  color: #fff;
+  padding-left: 4px;
+}
+
+/* Contacto */
+.footer-contact a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.footer-contact a:hover {
+  text-decoration: underline;
+}
+
+/* CSS — estilizado moderno para Bootstrap Icons */
+.social-container { display:flex; gap:.7rem; align-items:center; }
+
+.social-btn{
+  width:46px; height:46px; border-radius:12px;
+  display:inline-flex; align-items:center; justify-content:center;
+  background: rgba(255,255,255,0.03); color:#eafff5;
+  transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  border: 1px solid rgba(255,255,255,0.03);
+  text-decoration: none;
+  font-size: 1.15rem;
+}
+
+/* Hover: gradiente SENA y elevación */
+.social-btn:hover{
+  background: linear-gradient(135deg, #006a39, #02a65a);
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(2,80,40,0.20);
+  color: #fff;
+}
+
+/* Focus (teclado) */
+.social-btn:focus {
+  outline: 3px solid rgba(2,166,90,0.18);
+  outline-offset: 4px;
+}
+
+
+/* Línea inferior */
+.footer-bottom-link {
+  color: var(--footer-text);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer-bottom-link:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Botón volver arriba */
+.back-to-top {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(140deg, var(--sena-green), var(--sena-green-light));
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all .25s ease;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.back-to-top.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- SECCIÓN ---------- */
+.section-header {
+  border-left: 5px solid #39a900;
+  padding-left: 12px;
+}
+
+.section-title {
+  font-size: 1.9rem;
+  font-weight: 700;
+}
+
+.section-sub {
+  font-size: 0.95rem;
+  color: #666;
+  margin-top: -5px;
+}
+
+
+/* ============================================
+   TABLA PROFESIONAL SENA — Diseño Premium UI
+=============================================== */
+
+/* Contenedor con sombra suave */
+.table-modern {
+  background: #ffffff;
+  border-radius: 14px;
+  overflow: hidden;
+  border: none !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ENCABEZADO — VERDE INSTITUCIONAL */
+.table-modern thead tr {
+  background: linear-gradient(90deg, #2b7a00, #39a900);
+  color: #fff;
+}
+
+.table-modern thead th {
+  padding: 15px;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  border: none !important;
+  letter-spacing: 0.5px;
+}
+
+/* ============================================
+   CUERPO DE TABLA
+=============================================== */
+
+.table-modern tbody tr {
+  background: #ffffff;
+  transition: 0.22s ease-in-out;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+/* Efecto hover SUPER moderno */
+.table-modern tbody tr:hover {
+  background: rgba(57, 169, 0, 0.10);
+  transform: scale(1.003);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+}
+
+/* Celdas */
+.table-modern tbody td {
+  padding: 14px 18px;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Enlace del documento */
+.table-modern .table-link {
+  font-weight: 600;
+  color: #1d7600;
+  text-decoration: none;
+  transition: 0.25s;
+}
+
+.table-modern .table-link:hover {
+  color: #39a900;
+  text-shadow: 0 0 6px rgba(57, 169, 0, 0.3);
+}
+
+/* ============================================
+   MOBILE – CARDS MÁS MODERNAS
+=============================================== */
+
+.card-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.apprentice-card {
+  background: #ffffff;
+  border-left: 5px solid #39a900;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.apprentice-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.15);
+}
+
+/* Títulos */
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 6px;
+  color: #1a1a1a;
+}
+
+/* Programa */
+.card-program {
+  margin-top: 3px;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* Íconos */
+.student-icon i {
+  font-size: 1.3rem;
+  color: #39a900;
+  margin-right: 8px;
+}
+
+.doc-link {
+  color: #1d7600;
+  font-weight: 600;
+}
+.doc-link:hover {
+  color: #39a900;
+  text-decoration: underline;
+}
+
+/* ============================================
+   TITULOS Y SUBTÍTULOS EN PÁGINA
+=============================================== */
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #124b11;
+}
+
+.section-sub {
+  color: #4e4e4e;
+  margin-top: -5px;
+  font-size: 0.95rem;
+}
+
