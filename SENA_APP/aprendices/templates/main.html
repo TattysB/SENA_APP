@@ -1,28 +1,36 @@
-{% extends "master.html" %}
-{% load static %}
-
-{% block title %}SENA APP{% endblock %}
-
-{% block content %}
+{% extends "master.html" %} 
+{% load static %} 
+{% block title %}
+SENA APP{%endblock %} {% block content %}
 <main class="container-fluid px-0">
-
   <!-- HERO moderno -->
   <header class="hero-modern" role="banner" aria-label="Hero - Portal SENA">
     <!-- Fondo (imagen) -->
-    <div class="hero-bg" style="background-image: url('{% static 'aprendices/sena.png' %}');"></div>
+    <div
+      class="hero-bg"
+      style="background-image: url('{% static 'aprendices/sena.png' %}')"
+    ></div>
 
     <!-- overlay suave -->
     <div class="hero-overlay" aria-hidden="true"></div>
 
     <!-- Contenido -->
     <div class="container hero-content text-center text-white">
-      
-      <h1 class="hero-title">Bienvenidos al Portal del <span class="accent">SENA</span></h1>
-      <p class="hero-sub lead">Recursos, cursos y herramientas para aprendices e instructores. Accede rápido a tus módulos y gestiona tu formación.</p>
+      <h1 class="hero-title">
+        Bienvenidos al Portal del <span class="accent">SENA</span>
+      </h1>
+      <p class="hero-sub lead">
+        Recursos, cursos y herramientas para aprendices e instructores. Accede
+        rápido a tus módulos y gestiona tu formación.
+      </p>
 
       <div class="d-flex justify-content-center gap-3 mt-4 hero-cta-wrap">
-        <a href="/aprendices/" class="btn btn-cta btn-lg rounded-pill px-5">Ver aprendices</a>
-        <a href="/instructores/" class="btn btn-cta btn-lg rounded-pill px-5">Ver instructores</a>
+        <a href="/aprendices/" class="btn btn-cta btn-lg rounded-pill px-5"
+          >Ver aprendices</a
+        >
+        <a href="/instructores/" class="btn btn-cta btn-lg rounded-pill px-5"
+          >Ver instructor</a
+        >
       </div>
     </div>
   </header>
@@ -34,7 +42,10 @@
         <div class="card feature p-3 h-100">
           <div class="card-body">
             <h5 class="card-title">Gestión de aprendices</h5>
-            <p class="card-text">Crea, edita y consulta la información del aprendiz de forma segura.</p>
+            <p class="card-text">
+              Crea, edita y consulta la información del aprendiz de forma
+              segura.
+            </p>
             <a href="/aprendices/" class="link-more">Ir a aprendices →</a>
           </div>
         </div>
@@ -44,7 +55,9 @@
         <div class="card feature p-3 h-100">
           <div class="card-body">
             <h5 class="card-title">Gestión de instructores</h5>
-            <p class="card-text">Administra perfiles, asignaciones y horarios de instructores.</p>
+            <p class="card-text">
+              Administra perfiles, asignaciones y horarios de instructores.
+            </p>
             <a href="#" class="link-more">Ver instructores →</a>
           </div>
         </div>
@@ -54,7 +67,9 @@
         <div class="card feature p-3 h-100">
           <div class="card-body">
             <h5 class="card-title">Agenda y reportes</h5>
-            <p class="card-text">Consulta eventos, talleres y reportes de desempeño.</p>
+            <p class="card-text">
+              Consulta eventos, talleres y reportes de desempeño.
+            </p>
             <a href="#" class="link-more">Abrir panel →</a>
           </div>
         </div>
@@ -67,12 +82,11 @@
     <h3 class="mb-3">Aprendices recientes</h3>
     <ul class="list-inline aprendices-list">
       {% for x in aprendices %}
-        <li class="list-inline-item badge-aprendiz">{{ x.firstname }}</li>
+      <li class="list-inline-item badge-aprendiz">{{ x.firstname }}</li>
       {% empty %}
-        <li class="text-muted">No hay aprendices registrados.</li>
+      <li class="text-muted">No hay aprendices registrados.</li>
       {% endfor %}
     </ul>
   </section>
-
 </main>
 {% endblock %}
