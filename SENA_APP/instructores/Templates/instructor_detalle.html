@@ -1,0 +1,129 @@
+{% extends "master.html" %}
+{% block title %}Detalle del instructor - {{ instructor_detalle.nombre }} {{ instructor_detalle.apellido }}{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm my-4 detalle-instructor-card">
+  <div class="card-body p-4">
+    <div class="row g-3 align-items-center">
+      <!-- Avatar con iniciales -->
+      <div class="col-auto">
+        <div class="avatar rounded-3 d-flex align-items-center justify-content-center">
+          {{ instructor_detalle.nombre|default:""|slice:":1"|upper }}{{ instructor_detalle.apellido|default:""|slice:":1"|upper }}
+        </div>
+      </div>
+
+      
+      <div class="col">
+        <h2 class="h4 mb-1">
+          {{ instructor_detalle.nombre|default:"—" }} {{ instructor_detalle.apellido|default:"" }}
+        </h2>
+        <div class="small text-muted">
+          Especialidad :
+          <span class="badge program-badge">{{ instructor_detalle.especialidad|default:"—" }}</span>
+        </div>
+      </div>
+
+      <div class="col-auto text-end">
+        <a href="{% url 'instructores' %}" class="btn btn-sm btn-outline-secondary">← Volver</a>
+      </div>
+    </div>
+
+    <hr class="my-3" />
+
+    <div class="row">
+      <div class="col-md-6">
+        <ul class="list-unstyled mb-0 info-list">
+          <li><strong>Documento:</strong> {{ instructor_detalle.documento_id|default:"No registrado" }}</li>
+          <li><strong>Ciudad:</strong> {{ instructor_detalle.ciudad|default:"No registrado" }}</li>
+          <li>
+            <strong>Fecha de nacimiento:</strong>
+            {% if instructor_detalle.fecha_nacimiento %}
+              {{ instructor_detalle.fecha_nacimiento|date:"d \\d\\e F Y" }}
+            {% else %}
+              <span class="text-muted">No registrado</span>
+            {% endif %}
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-md-6">
+        <ul class="list-unstyled mb-0 info-list">
+          <li>
+            <strong>Correo:</strong>
+            {% if instructor_detalle.correo %}
+              <a href="mailto:{{ instructor_detalle.correo }}" class="contact-link">{{ instructor_detalle.correo }}</a>
+            {% else %}
+              <span class="text-muted">No registrado</span>
+            {% endif %}
+          </li>
+
+          <li>
+            <strong>Teléfono:</strong>
+            {% if instructor_detalle.telefono %}
+              <a href="tel:{{ instructor_detalle.telefono }}" class="contact-link">{{ instructor_detalle.telefono }}</a>
+            {% else %}
+              <span class="text-muted">No registrado</span>
+            {% endif %}
+          </li>
+
+          <li>
+            <strong>Dirección:</strong>
+            {{ instructor_detalle.direccion|default:"No registrado" }}
+          </li>
+
+          <li>
+            <strong>Nivel de Educación:</strong>
+            {{ instructor_detalle.nivel_educativo|default:"No registrado" }}
+          </li>
+
+          <li>
+            <strong>Especialidad:</strong>
+            {{ instructor_detalle.especialidad|default:"No registrado" }}
+          </li>
+
+          <li>
+            <strong>Años de Experiencia:</strong>
+            {{ instructor_detalle.anos_experiencia|default:"No registrado" }}
+          </li>
+
+          <li>
+            <strong>Activo:</strong>
+            {% if instructor_detalle.activo %}
+              Sí
+            {% else %}
+              No
+            {% endif %}
+          </li>
+
+          <li>
+            <strong>Fecha de vinculación:</strong>
+            {% if instructor_detalle.fecha_vinculacion %}
+              {{ instructor_detalle.fecha_vinculacion|date:"d \\d\\e F Y" }}
+            {% else %}
+              <span class="text-muted">No registrado</span>
+            {% endif %}
+          </li>
+
+          <li>
+            <strong>Fecha Registro:</strong>
+            {% if instructor_detalle.fecha_registro %}
+              {{ instructor_detalle.fecha_registro|date:"d \\d\\e F Y" }}
+            {% else %}
+              <span class="text-muted">No registrado</span>
+            {% endif %}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Acciones -->
+    <div class="mt-4 d-flex flex-wrap gap-2">
+      {% if instructor_detalle.correo %}
+        <a href="mailto:{{ instructor_detalle.correo }}" class="btn btn-success btn-sm">Enviar correo</a>
+      {% endif %}
+      <a href="{% url 'instructores' %}" class="btn btn-outline-secondary btn-sm">Ver lista</a>
+      <a href="#" class="btn btn-outline-success btn-sm">Ver historial</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
