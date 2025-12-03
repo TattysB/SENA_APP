@@ -1,0 +1,42 @@
+[
+  {
+    "model": "programas.programa",
+    "pk": 1,
+    "fields": {
+      "codigo": "TGL-001",
+      "nombre": "Tecnólogo en Desarrollo de Software",
+      "nivel_formacion": "TGL",
+      "modalidad": "MIX",
+      "duracion_meses": 24,
+      "duracion_horas": 1800,
+      "descripcion": "Formación en desarrollo de software, metodologías y mejores prácticas.",
+      "competencias": "Programación, pruebas, despliegue y mantenimiento de aplicaciones.",
+      "perfil_egreso": "Profesional capaz de diseñar y construir soluciones de software.",
+      "requisitos_ingreso": "Bachiller o título equivalente.",
+      "centro_formacion": "Centro Distrital de Tecnología",
+      "regional": "Bogotá",
+      "estado": "ACT",
+      "fecha_creacion": "2023-01-15"
+    }
+  },
+  {
+    "model": "programas.programa",
+    "pk": 2,
+    "fields": {
+      "codigo": "TEC-002",
+      "nombre": "Técnico en Soporte de Sistemas",
+      "nivel_formacion": "TEC",
+      "modalidad": "PRE",
+      "duracion_meses": 12,
+      "duracion_horas": 720,
+      "descripcion": "Formación en instalación, configuración y mantenimiento de sistemas.",
+      "competencias": "Soporte técnico, redes básicas, administración de sistemas.",
+      "perfil_egreso": "Técnico con capacidades para soportar infraestructuras informáticas.",
+      "requisitos_ingreso": "Bachiller.",
+      "centro_formacion": "Centro Regional Norte",
+      "regional": "Medellín",
+      "estado": "ACT",
+      "fecha_creacion": "2022-07-01"
+    }
+  }
+]
