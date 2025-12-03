@@ -1,7 +1,5 @@
-{% extends "master.html" %} 
-{% load static %} 
-{% block title %}
-SENA APP{%endblock %} {% block content %}
+{% extends "master.html" %} {% load static %} {% block title %} SENA
+APP{%endblock %} {% block content %}
 <main class="container-fluid px-0">
   <!-- HERO moderno -->
   <header class="hero-modern" role="banner" aria-label="Hero - Portal SENA">
@@ -31,6 +29,9 @@ SENA APP{%endblock %} {% block content %}
         <a href="/instructores/" class="btn btn-cta btn-lg rounded-pill px-5"
           >Ver instructor</a
         >
+        <a href="/programas/" class="btn btn-cta btn-lg rounded-pill px-5"
+          >Ver programas</a
+        >
       </div>
     </div>
   </header>
@@ -58,7 +59,7 @@ SENA APP{%endblock %} {% block content %}
             <p class="card-text">
               Administra perfiles, asignaciones y horarios de instructores.
             </p>
-            <a href="#" class="link-more">Ver instructores →</a>
+            <a href="/instructores/" class="link-more">Ver instructores →</a>
           </div>
         </div>
       </div>
@@ -70,7 +71,7 @@ SENA APP{%endblock %} {% block content %}
             <p class="card-text">
               Consulta eventos, talleres y reportes de desempeño.
             </p>
-            <a href="#" class="link-more">Abrir panel →</a>
+            <a href="/programas/" class="link-more">Ir a programas →</a>
           </div>
         </div>
       </div>

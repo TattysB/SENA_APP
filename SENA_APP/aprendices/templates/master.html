@@ -11,7 +11,6 @@
     <title>{% block title %}SENA APP{% endblock %}</title>
     {% bootstrap_css %}
 
-
     {% bootstrap_javascript %}
   </head>
 
@@ -35,6 +34,7 @@
         <li class="nav-item"><a class="nav-link active" href="/">Inicio</a></li>
         <li class="nav-item"><a class="nav-link" href="/aprendices/">Aprendices</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'instructores' %}">Instructores</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'programas' %}">Programas</a></li>
 
         <!-- Search (esconde en móvil) -->
         <li class="nav-item d-none d-lg-flex align-items-center ms-3">
