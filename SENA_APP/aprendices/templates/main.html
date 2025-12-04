@@ -22,7 +22,9 @@ APP{%endblock %} {% block content %}
         rápido a tus módulos y gestiona tu formación.
       </p>
 
-      <div class="d-flex justify-content-center gap-3 mt-4 hero-cta-wrap">
+      <div
+        class="d-flex justify-content-center gap-3 mt-4 hero-cta-wrap flex-wrap"
+      >
         <a href="/aprendices/" class="btn btn-cta btn-lg rounded-pill px-5"
           >Ver aprendices</a
         >
@@ -31,6 +33,9 @@ APP{%endblock %} {% block content %}
         >
         <a href="/programas/" class="btn btn-cta btn-lg rounded-pill px-5"
           >Ver programas</a
+        >
+        <a href="/cursos/" class="btn btn-cta btn-lg rounded-pill px-5"
+          >Ver cursos</a
         >
       </div>
     </div>
@@ -67,11 +72,11 @@ APP{%endblock %} {% block content %}
       <div class="col-md-4">
         <div class="card feature p-3 h-100">
           <div class="card-body">
-            <h5 class="card-title">Agenda y reportes</h5>
+            <h5 class="card-title">Gestión de Cursos</h5>
             <p class="card-text">
-              Consulta eventos, talleres y reportes de desempeño.
+              Consulta, asigna y gestiona los cursos de formación disponibles.
             </p>
-            <a href="/programas/" class="link-more">Ir a programas →</a>
+            <a href="/cursos/" class="link-more">Ir a cursos →</a>
           </div>
         </div>
       </div>
