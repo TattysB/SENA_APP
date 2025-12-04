@@ -1,0 +1,192 @@
+{% extends "master.html" %}
+{% block title %}Detalle del Curso - {{ curso.nombre }}{% endblock %}
+{% block content %}
+<div class="programas-page container-fluid">
+  <div class="card-panel my-4">
+    <div class="row g-4 align-items-start">
+      <div class="col-12 col-lg-8">
+        <div class="d-flex align-items-center gap-3">
+          <div
+            class="avatar rounded-3 d-flex align-items-center justify-content-center"
+            style="width: 84px; height: 84px; font-size: 1.6rem"
+          >
+            <i class="bi bi-calendar-event" style="font-size: 1.3rem"></i>
+          </div>
+          <div>
+            <h2 class="section-title mb-1">{{ curso.nombre }}</h2>
+            <div class="small text-muted">
+              Código: <span class="code">{{ curso.codigo }}</span>
+              <span class="badge program-badge ms-2 text-success"
+                >{{ curso.get_estado_display }}</span
+              >
+            </div>
+          </div>
+          <div class="ms-auto d-none d-md-flex gap-2">
+            <a
+              href="{% url 'lista_cursos' %}"
+              class="btn btn-outline-secondary btn-sm"
+              >← Volver a la lista</a
+            >
+            <a href="#" class="btn btn-outline-success btn-sm">Editar Curso</a>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-12">
+            <div
+              class="card"
+              style="
+                border-radius: 12px;
+                border: 0;
+                box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+              "
+            >
+              <div class="card-body p-3">
+                <h5 class="mb-2">Detalles Generales</h5>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <p class="mb-1"><strong>Programa de Formación:</strong> {{ curso.programa.nombre }}</p>
+                    <p class="mb-1"><strong>Instructor Coordinador:</strong> {{ curso.instructor_coordinador.nombre }} {{ curso.instructor_coordinador.apellido }}</p>
+                    <p class="mb-1"><strong>Horario:</strong> {{ curso.horario }}</p>
+                    <p class="mb-1"><strong>Aula/Ambiente:</strong> {{ curso.aula }}</p>
+                  </div>
+                  <div class="col-sm-6">
+                    <p class="mb-1"><strong>Fecha Inicio:</strong> {{ curso.fecha_inicio|date:"d \d\e F Y" }}</p>
+                    <p class="mb-1"><strong>Fecha Finalización:</strong> {{ curso.fecha_fin|date:"d \d\e F Y" }}</p>
+                    <p class="mb-1"><strong>Estado:</strong> <span class="badge bg-{{ curso.estado|lower }} text-success">{{ curso.get_estado_display }}</span></p>
+                    <p class="mb-1"><strong>Cupos:</strong> {{ curso.aprendices.count }}/{{ curso.cupos_maximos }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% if curso.observaciones %}
+        <div class="row mt-3">
+          <div class="col-12">
+            <h5>Observaciones</h5>
+            <p>{{ curso.observaciones }}</p>
+          </div>
+        </div>
+        {% endif %}
+
+        <div class="row mt-4">
+          <div class="col-12">
+            <h5 class="mb-3">Instructores del Curso</h5>
+            {% if instructores_curso %}
+            <div
+              class="card"
+              style="
+                border-radius: 12px;
+                border: 0;
+                box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+              "
+            >
+              <div class="card-body p-3">
+                <div class="table-responsive">
+                  <table class="table table-modern table-sm mb-0">
+                    <thead>
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Rol</th>
+                        <th>Especialidad</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for instructor_curso in instructores_curso %}
+                      <tr>
+                        <td><a href="{% url 'detalle_instructor' instructor_curso.instructor.id %}" class="table-link">{{ instructor_curso.instructor.nombre }} {{ instructor_curso.instructor.apellido }}</a></td>
+                        <td>{{ instructor_curso.rol }}</td>
+                        <td>{{ instructor_curso.instructor.especialidad|default:"—" }}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            {% else %}
+            <div class="alert alert-info">
+              No hay instructores asignados a este curso.
+            </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-12">
+            <h5 class="mb-3">Aprendices Inscritos</h5>
+            {% if aprendices_curso %}
+            <div
+              class="card"
+              style="
+                border-radius: 12px;
+                border: 0;
+                box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+              "
+            >
+              <div class="card-body p-3">
+                <div class="table-responsive">
+                  <table class="table table-modern table-sm mb-0">
+                    <thead>
+                      <tr>
+                        <th>Nombre</th>
+                        <th>Documento</th>
+                        <th>Email</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for aprendiz_curso in aprendices_curso %}
+                      <tr>
+                        <td><a href="{% url 'detalle_aprendiz' aprendiz_curso.aprendiz.id %}" class="table-link">{{ aprendiz_curso.aprendiz.firstname }} {{ aprendiz_curso.aprendiz.lastname }}</a></td>
+                        <td>{{ aprendiz_curso.aprendiz.document_id }}</td>
+                        <td>{% if aprendiz_curso.aprendiz.email %}<a href="mailto:{{ aprendiz_curso.aprendiz.email }}">{{ aprendiz_curso.aprendiz.email }}</a>{% else %}<span class="text-muted">—</span>{% endif %}</td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            {% else %}
+            <div class="alert alert-info">
+              No hay aprendices inscritos en este curso.
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-4">
+        <div class="card-panel">
+          <h6 class="mb-3">Información del Curso</h6>
+          <ul class="list-unstyled mb-3 info-list">
+            <li>
+              <strong>Código:</strong>
+              <span class="code">{{ curso.codigo }}</span>
+            </li>
+            <li><strong>Programa:</strong> {{ curso.programa.nombre }}</li>
+            <li><strong>Estado:</strong> <span class="badge bg-{{ curso.estado|lower }} text-white">{{ curso.get_estado_display }}</span></li>
+            <li><strong>Cupos disponibles:</strong> {{ curso.cupos_disponibles }}</li>
+            <li>
+              <strong>Ocupación:</strong>
+              <div class="progress mt-1" style="height: 8px">
+                <div class="progress-bar bg-success" role="progressbar" style="width: {{ curso.porcentaje_ocupacion }}%" aria-valuenow="{{ curso.porcentaje_ocupacion }}" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <small class="text-muted">{{ curso.porcentaje_ocupacion|floatformat:0 }}%</small>
+            </li>
+            <li><strong>Fecha de Registro:</strong> {{ curso.fecha_registro|date:"d \d\e F Y H:i" }}</li>
+            </li>
+          </ul>
+          <div class="d-grid gap-2">
+            <a href="#" class="btn btn-outline-success btn-sm"
+              >Exportar Reporte</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

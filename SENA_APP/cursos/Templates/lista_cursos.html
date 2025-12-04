@@ -1,0 +1,106 @@
+{% extends 'master.html' %} {% block title %}Lista de Cursos{% endblock %}
+{%block content %} {% load static %}
+<div class="row mt-4">
+  <div class="col-12">
+    <link rel="stylesheet" href="{% static 'mystyles.css' %}" />
+
+    <div class="section-header mb-4">
+      <h2 class="section-title">
+        <i class="bi bi-calendar-event me-2"></i> Cursos Disponibles
+      </h2>
+      <p class="section-sub">
+        Listado de todos los cursos de formación activos y programados.
+      </p>
+    </div>
+
+    {% if lista_cursos %}
+
+    <div class="table-responsive d-none d-md-block">
+      <table class="table table-modern table-hover align-middle">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Nombre del Curso</th>
+            <th>Programa</th>
+            <th>Instructor Coordinador</th>
+            <th>Estado</th>
+            <th>Cupos</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for curso in lista_cursos %}
+          <tr>
+            <td>
+              <a class="table-link" href="{% url 'detalle_curso' curso.id %}">
+                {{ curso.codigo }}
+              </a>
+            </td>
+            <td>{{ curso.nombre }}</td>
+            <td>
+              <span class="badge program-badge"
+                >{{ curso.programa.nombre }}</span
+              >
+            </td>
+            <td>{{ curso.instructor_coordinador.nombre }}</td>
+            <td>
+              <span class="badge bg-{{ curso.estado|lower }} text-success"
+                >{{ curso.get_estado_display }}</span
+              >
+            </td>
+            <td>
+              <small class="text-muted">
+                {{ curso.aprendices.count }}/{{ curso.cupos_maximos }}
+              </small>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="d-block d-md-none mt-3">
+      <div class="card-grid">
+        {% for curso in lista_cursos %}
+        <div class="apprentice-card">
+          <div class="card-header-row">
+            <span class="student-icon"
+              ><i class="bi bi-calendar-event"></i
+            ></span>
+            <a href="{% url 'detalle_curso' curso.id %}" class="doc-link">
+              {{ curso.codigo }}
+            </a>
+          </div>
+
+          <div class="card-title">{{ curso.nombre }}</div>
+
+          <div class="card-program">
+            <i class="bi bi-book-fill me-1"></i> {{ curso.programa.nombre }} |
+            <span class="badge bg-{{ curso.estado|lower }} text-success"
+              >{{ curso.get_estado_display }}</span
+            >
+          </div>
+
+          <div class="card-program mt-2">
+            <small class="text-muted">
+              Cupos:
+              <strong
+                >{{ curso.aprendices.count }}/{{ curso.cupos_maximos }}</strong
+              >
+            </small>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    {% else %}
+
+    <div class="no-data text-center p-5 border rounded">
+      <i class="bi bi-exclamation-octagon-fill fs-3 text-warning"></i>
+      <p class="mt-2">No hay cursos disponibles en este momento.</p>
+    </div>
+
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
