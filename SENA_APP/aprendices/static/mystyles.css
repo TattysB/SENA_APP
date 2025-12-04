@@ -615,6 +615,16 @@
   font-size: 0.95rem;
 }
 
+/* Programa badge: asegurar que el texto del Programa sea negro */
+.program-badge{
+  color: #000 !important;
+  background: transparent;
+  font-weight: 700;
+  border-radius: 8px;
+  padding: 3px 8px;
+  display: inline-block;
+}
+
 
 :root{
   --bg-page: #f6f8fb;             
