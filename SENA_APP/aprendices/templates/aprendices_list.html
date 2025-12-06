@@ -1,17 +1,28 @@
 {% extends 'master.html' %} {% block title %}Lista de Aprendices{% endblock %}
-{% block content %}
-{% load static %}
+{% block content %} {% load static %}
 <div class="row mt-4">
   <div class="col-12">
     <link rel="stylesheet" href="{% static 'mystyles.css' %}" />
-    <!-- Título moderno -->
-    <div class="section-header mb-4">
-      <h2 class="section-title">
-        <i class="bi bi-people-fill me-2"></i> Lista de Aprendices
-      </h2>
-      <p class="section-sub">
-        Consulta rápida y organizada de los aprendices registrados.
-      </p>
+    <!-- Título moderno + acción Agregar -->
+    <div
+      class="section-header mb-4 d-flex justify-content-between align-items-start"
+    >
+      <div>
+        <h2 class="section-title">
+          <i class="bi bi-people-fill me-2"></i> Lista de Aprendices
+        </h2>
+        <p class="section-sub">
+          Consulta rápida y organizada de los aprendices registrados.
+        </p>
+      </div>
+      <div>
+        <a
+          href="{% url 'aprendices:crear_aprendiz' %}"
+          class="btn btn-success btn-sm"
+        >
+          <i class="bi bi-plus-lg"></i> Agregar Aprendiz
+        </a>
+      </div>
     </div>
 
     <!-- TABLA (pantallas grandes) -->
@@ -23,6 +34,7 @@
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Programa</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -31,7 +43,7 @@
             <td>
               <a
                 class="table-link"
-                href="{% url 'detalle_aprendiz' aprendiz.id %}"
+                href="{% url 'aprendices:detalle_aprendiz' aprendiz.id %}"
               >
                 {{ aprendiz.document_id }}
               </a>
@@ -39,6 +51,23 @@
             <td>{{ aprendiz.firstname }}</td>
             <td>{{ aprendiz.lastname }}</td>
             <td>{{ aprendiz.program }}</td>
+            <td>
+              <a
+                href="{% url 'aprendices:detalle_aprendiz' aprendiz.id %}"
+                class="btn btn-sm btn-outline-secondary me-1"
+                >Ver</a
+              >
+              <a
+                href="{% url 'aprendices:editar_aprendiz' aprendiz.id %}"
+                class="btn btn-sm btn-outline-warning me-1"
+                >Editar</a
+              >
+              <a
+                href="{% url 'aprendices:eliminar_aprendiz' aprendiz.id %}"
+                class="btn btn-sm btn-outline-danger"
+                >Eliminar</a
+              >
+            </td>
           </tr>
           {% empty %}
           <tr>
@@ -59,7 +88,10 @@
         <div class="apprentice-card">
           <div class="card-header-row">
             <span class="student-icon"><i class="bi bi-person-badge"></i></span>
-            <a href="{% url 'detalle_aprendiz' aprendiz.id %}" class="doc-link">
+            <a
+              href="{% url 'aprendices:detalle_aprendiz' aprendiz.id %}"
+              class="doc-link"
+            >
               {{ aprendiz.document_id }}
             </a>
           </div>
@@ -70,6 +102,23 @@
 
           <div class="card-program">
             <i class="bi bi-journal-code me-1"></i> {{ aprendiz.program }}
+          </div>
+          <div class="mt-2 d-flex gap-2">
+            <a
+              href="{% url 'aprendices:detalle_aprendiz' aprendiz.id %}"
+              class="btn btn-sm btn-outline-secondary"
+              >Ver</a
+            >
+            <a
+              href="{% url 'aprendices:editar_aprendiz' aprendiz.id %}"
+              class="btn btn-sm btn-outline-warning"
+              >Editar</a
+            >
+            <a
+              href="{% url 'aprendices:eliminar_aprendiz' aprendiz.id %}"
+              class="btn btn-sm btn-outline-danger"
+              >Eliminar</a
+            >
           </div>
         </div>
         {% endfor %}

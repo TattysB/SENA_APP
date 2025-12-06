@@ -13,3 +13,8 @@ class Aprendiz(models.Model):
 
     def __str__(self):
         return f"{self.document_id} {self.firstname} {self.lastname}"
+    
+    def nombre_completo(self):
+        return f"{self.firstname} {self.lastname}"
+
+

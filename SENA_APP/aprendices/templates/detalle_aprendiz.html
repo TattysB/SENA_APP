@@ -1,7 +1,11 @@
 {% extends "master.html" %}
-{% block title %}Detalle del Aprendiz - {{ aprendiz_detalle.firstname }} {{ aprendiz_detalle.lastname }}{% endblock %}
+
+{% block title %}
+Detalle del Aprendiz - {{ aprendiz_detalle.firstname }} {{ aprendiz_detalle.lastname }}
+{% endblock %}
 
 {% block content %}
+
 <div class="card shadow-sm my-4 detalle-aprendiz-card">
   <div class="card-body p-4">
     <div class="row g-3 align-items-center">
@@ -11,37 +15,52 @@
           {{ aprendiz_detalle.firstname|slice:":1" }}{{ aprendiz_detalle.lastname|slice:":1" }}
         </div>
       </div>
+      </div>
 
       <!-- Nombre y Programa -->
       <div class="col">
-        <h2 class="h4 mb-1">{{ aprendiz_detalle.firstname }} {{ aprendiz_detalle.lastname }}</h2>
+        <h2 class="h4 mb-1">
+          {{ aprendiz_detalle.firstname }} {{ aprendiz_detalle.lastname }}
+        </h2>
         <div class="small text-muted">
-          Programa: ADSO
+          Programa:
           <span class="badge program-badge">{{ aprendiz_detalle.program|default:"—" }}</span>
         </div>
       </div>
 
       <!-- Botón volver -->
       <div class="col-auto text-end">
-        <a href="{% url 'aprendices' %}" class="btn btn-sm btn-outline-secondary">← Volver</a>
+        <a href="{% url 'aprendices:aprendices' %}" class="btn btn-sm btn-outline-secondary">← Volver</a>
       </div>
     </div>
 
-    <hr class="my-3">
+    <hr class="my-3" />
 
     <!-- Datos organizados en dos columnas -->
     <div class="row">
       <div class="col-md-6">
         <ul class="list-unstyled mb-0 info-list">
-          <li><strong>Documento:</strong> {{ aprendiz_detalle.document_id|default:"No registrado" }}</li>
-          <li><strong>Ciudad:</strong> {{ aprendiz_detalle.city|default:"—" }}</li>
-          <li><strong>Fecha de nacimiento:</strong> {% if aprendiz_detalle.birthdate %}{{ aprendiz_detalle.birthdate|date:"d \\d\\e F Y" }}{% else %}—{% endif %}</li>
+          <li>
+            <strong>Documento:</strong> {{ aprendiz_detalle.document_id|default:"No registrado" }}
+          </li>
+          <li>
+            <strong>Ciudad:</strong> {{ aprendiz_detalle.city|default:"—" }}
+          </li>
+          <li>
+            <strong>Fecha de nacimiento:</strong>
+            {% if aprendiz_detalle.birthdate %}
+              {{ aprendiz_detalle.birthdate|date:"d \d\e F Y" }}
+            {% else %}
+              —
+            {% endif %}
+          </li>
         </ul>
       </div>
 
       <div class="col-md-6">
         <ul class="list-unstyled mb-0 info-list">
-          <li><strong>Email:</strong>
+          <li>
+            <strong>Email:</strong>
             {% if aprendiz_detalle.email %}
               <a href="mailto:{{ aprendiz_detalle.email }}" class="contact-link">{{ aprendiz_detalle.email }}</a>
             {% else %}
@@ -49,14 +68,14 @@
             {% endif %}
           </li>
 
-          <li><strong>Teléfono:</strong>
+          <li>
+            <strong>Teléfono:</strong>
             {% if aprendiz_detalle.phone %}
               <a href="tel:{{ aprendiz_detalle.phone }}" class="contact-link">{{ aprendiz_detalle.phone }}</a>
             {% else %}
               <span class="text-muted">No registrado</span>
             {% endif %}
           </li>
-
         </ul>
       </div>
     </div>
@@ -66,9 +85,12 @@
       {% if aprendiz_detalle.email %}
         <a href="mailto:{{ aprendiz_detalle.email }}" class="btn btn-success btn-sm">Enviar correo</a>
       {% endif %}
-      <a href="{% url 'aprendices' %}" class="btn btn-outline-secondary btn-sm">Ver lista</a>
+      <a href="{% url 'aprendices:aprendices' %}" class="btn btn-outline-secondary btn-sm">Ver lista</a>
       <a href="#" class="btn btn-outline-success btn-sm">Ver historial</a>
+      <a href="{% url 'aprendices:editar_aprendiz' aprendiz_detalle.id %}" class="btn btn-outline-warning btn-sm">Editar</a>
+      <a href="{% url 'aprendices:eliminar_aprendiz' aprendiz_detalle.id %}" class="btn btn-outline-danger btn-sm">Eliminar</a>
     </div>
   </div>
 </div>
+
 {% endblock %}

@@ -1,0 +1,123 @@
+{% extends 'master.html' %}
+ {% block title %}
+ Agregar Aprendiz - SENA APP
+{%endblock %} 
+{% block content %}
+<div class="row justify-content-center mt-4">
+  <div class="col-md-8">
+    <div class="card shadow-sm">
+      <div
+        class="card-header bg-success text-white d-flex align-items-center justify-content-between"
+      >
+        <div>
+          <h4 class="mb-0">
+            <i class="bi bi-person-plus-fill me-2"></i> Agregar Aprendiz
+          </h4>
+          <small class="text-white-50"
+            >Crea un nuevo registro de aprendiz</small
+          >
+        </div>
+        <div>
+          <a
+            href="{% url 'aprendices:aprendices' %}"
+            class="btn btn-sm btn-light text-success"
+          >
+            <i class="bi bi-x-circle"></i> Cancelar
+          </a>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <form method="post" novalidate>
+          {% csrf_token %} {% if form.non_field_errors %}
+          <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+          {% endif %}
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label"
+                >{{ form.document_id.label }}
+                <span class="text-danger">*</span></label
+              >
+              {{ form.document_id }} {% if form.document_id.errors %}
+              <div class="text-danger small mt-1">
+                {{ form.document_id.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label"
+                >{{ form.firstname.label }}
+                <span class="text-danger">*</span></label
+              >
+              {{ form.firstname }} {% if form.firstname.errors %}
+              <div class="text-danger small mt-1">
+                {{ form.firstname.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label"
+                >{{ form.lastname.label }}
+                <span class="text-danger">*</span></label
+              >
+              {{ form.lastname }} {% if form.lastname.errors %}
+              <div class="text-danger small mt-1">
+                {{ form.lastname.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">{{ form.phone.label }}</label>
+              {{ form.phone }} {% if form.phone.errors %}
+              <div class="text-danger small mt-1">{{ form.phone.errors }}</div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">{{ form.email.label }}</label>
+              {{ form.email }} {% if form.email.errors %}
+              <div class="text-danger small mt-1">{{ form.email.errors }}</div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label"
+                >{{ form.birthdate.label }}
+                <span class="text-danger">*</span></label
+              >
+              {{ form.birthdate }} {% if form.birthdate.errors %}
+              <div class="text-danger small mt-1">
+                {{ form.birthdate.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="col-12">
+              <label class="form-label">{{ form.city.label }}</label>
+              {{ form.city }} {% if form.city.errors %}
+              <div class="text-danger small mt-1">{{ form.city.errors }}</div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="mt-4 d-flex justify-content-end gap-2">
+            <a
+              href="{% url 'aprendices:aprendices' %}"
+              class="btn btn-outline-secondary"
+              >Cancelar</a
+            >
+            <button type="submit" class="btn btn-success">
+              <i class="bi bi-save me-1"></i> Guardar Aprendiz
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
