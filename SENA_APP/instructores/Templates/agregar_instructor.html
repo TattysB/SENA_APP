@@ -1,0 +1,199 @@
+{% extends 'master.html' %} {% block title %} Agregar Instructor - SENA APP {%endblock %} {% block content %}
+
+<div class="row justify-content-center mt-4">
+  <div class="col-md-8">
+    <div class="card shadow-sm">
+      <div
+        class="card-header bg-success text-white d-flex align-items-center justify-content-between"
+      >
+        <div>
+          <h4 class="mb-0">
+            <i class="bi bi-plus-lg me-2"></i> Agregar Instructor
+          </h4>
+          <small class="text-white-50"
+            >Crea un nuevo registro de instructor</small
+          >
+        </div>
+        <div>
+          <a
+            href="{% url 'instructores:lista_instructores' %}"
+            class="btn btn-sm btn-light text-success"
+          >
+            <i class="bi bi-x-circle"></i> Cancelar
+          </a>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <form method="post" novalidate>
+          {% csrf_token %} {% if form.non_field_errors %}
+          <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+          {% endif %}
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label"
+                >{{ form.tipo_documento.label }}
+                <span class="text-danger">*</span></label
+              >
+              {{ form.tipo_documento }} {% if form.tipo_documento.errors %}
+              <div class="text-danger small mt-1">
+                {{ form.tipo_documento.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label"
+                >{{ form.documento_id.label }}
+                <span class="text-danger">*</span></label
+              >
+              {{ form.documento_id }} {% if form.documento_id.errors %}
+              <div class="text-danger small mt-1">
+                {{ form.documento_id.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label"
+                >{{ form.nombre.label }}
+                <span class="text-danger">*</span></label
+              >
+              {{ form.nombre }} {% if form.nombre.errors %}
+              <div class="text-danger small mt-1">{{ form.nombre.errors }}</div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label"
+                >{{ form.apellido.label }}
+                <span class="text-danger">*</span></label
+              >
+              {{ form.apellido }} {% if form.apellido.errors %}
+              <div class="text-danger small mt-1">
+                {{ form.apellido.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">{{ form.telefono.label }}</label>
+              {{ form.telefono }} {% if form.telefono.errors %}
+              <div class="text-danger small mt-1">
+                {{ form.telefono.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">{{ form.correo.label }}</label>
+              {{ form.correo }} {% if form.correo.errors %}
+              <div class="text-danger small mt-1">{{ form.correo.errors }}</div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label"
+                >{{ form.fecha_nacimiento.label }}
+                <span class="text-danger">*</span></label
+              >
+              {{ form.fecha_nacimiento }} {% if form.fecha_nacimiento.errors %}
+              <div class="text-danger small mt-1">
+                {{ form.fecha_nacimiento.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">{{ form.ciudad.label }}</label>
+              {{ form.ciudad }} {% if form.ciudad.errors %}
+              <div class="text-danger small mt-1">{{ form.ciudad.errors }}</div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">{{ form.direccion.label }}</label>
+              {{ form.direccion }} {% if form.direccion.errors %}
+              <div class="text-danger small mt-1">
+                {{ form.direccion.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label"
+                >{{ form.nivel_educativo.label }}
+                <span class="text-danger">*</span></label
+              >
+              {{ form.nivel_educativo }} {% if form.nivel_educativo.errors %}
+              <div class="text-danger small mt-1">
+                {{ form.nivel_educativo.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">{{ form.especialidad.label }}</label>
+              {{ form.especialidad }} {% if form.especialidad.errors %}
+              <div class="text-danger small mt-1">
+                {{ form.especialidad.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label"
+                >{{ form.anos_experiencia.label }}</label
+              >
+              {{ form.anos_experiencia }} {% if form.anos_experiencia.errors %}
+              <div class="text-danger small mt-1">
+                {{ form.anos_experiencia.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label"
+                >{{ form.fecha_vinculacion.label }}</label
+              >
+              {{ form.fecha_vinculacion }} {% if form.fecha_vinculacion.errors%}
+              <div class="text-danger small mt-1">
+                {{ form.fecha_vinculacion.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">{{ form.activo.label }}</label>
+              <div class="form-check">
+                {{ form.activo }}
+                <label
+                  class="form-check-label"
+                  for="{{ form.activo.id_for_label }}"
+                  >Activo</label
+                >
+              </div>
+              {% if form.activo.errors %}
+              <div class="text-danger small mt-1">{{ form.activo.errors }}</div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="mt-4 d-flex justify-content-end gap-2">
+            <a
+              href="{% url 'instructores:lista_instructores' %}"
+              class="btn btn-outline-secondary"
+              >Cancelar</a
+            >
+            <button type="submit" class="btn btn-success">
+              <i class="bi bi-save me-1"></i> Guardar Instructor
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
