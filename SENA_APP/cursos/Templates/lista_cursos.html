@@ -1,16 +1,26 @@
-{% extends 'master.html' %} {% block title %}Lista de Cursos{% endblock %}
-{%block content %} {% load static %}
+{% extends 'master.html' %} {% block title %} Lista de Cursos {% endblock %} {%block content %} {% load static %}
+
 <div class="row mt-4">
   <div class="col-12">
     <link rel="stylesheet" href="{% static 'mystyles.css' %}" />
 
-    <div class="section-header mb-4">
-      <h2 class="section-title">
-        <i class="bi bi-calendar-event me-2"></i> Cursos Disponibles
-      </h2>
-      <p class="section-sub">
-        Listado de todos los cursos de formación activos y programados.
-      </p>
+    <!-- Título moderno + acción Agregar -->
+    <div
+      class="section-header mb-4 d-flex justify-content-between align-items-start"
+    >
+      <div>
+        <h2 class="section-title">
+          <i class="bi bi-calendar-event me-2"></i> Cursos Disponibles
+        </h2>
+        <p class="section-sub">
+          Listado de todos los cursos de formación activos y programados.
+        </p>
+      </div>
+      <div>
+        <a href="{% url 'cursos:crear_curso' %}" class="btn btn-success btn-sm">
+          <i class="bi bi-plus-lg"></i> Agregar Curso
+        </a>
+      </div>
     </div>
 
     {% if lista_cursos %}
@@ -25,13 +35,17 @@
             <th>Instructor Coordinador</th>
             <th>Estado</th>
             <th>Cupos</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
           {% for curso in lista_cursos %}
           <tr>
             <td>
-              <a class="table-link" href="{% url 'detalle_curso' curso.id %}">
+              <a
+                class="table-link"
+                href="{% url 'cursos:detalle_curso' curso.id %}"
+              >
                 {{ curso.codigo }}
               </a>
             </td>
@@ -48,9 +62,26 @@
               >
             </td>
             <td>
-              <small class="text-muted">
-                {{ curso.aprendices.count }}/{{ curso.cupos_maximos }}
-              </small>
+              <small class="text-muted"
+                >{{ curso.aprendices.count }}/{{ curso.cupos_maximos }}</small
+              >
+            </td>
+            <td>
+              <a
+                href="{% url 'cursos:detalle_curso' curso.id %}"
+                class="btn btn-sm btn-outline-secondary me-1"
+                >Ver</a
+              >
+              <a
+                href="{% url 'cursos:editar_curso' curso.id %}"
+                class="btn btn-sm btn-outline-warning me-1"
+                >Editar</a
+              >
+              <a
+                href="{% url 'cursos:eliminar_curso' curso.id %}"
+                class="btn btn-sm btn-outline-danger"
+                >Eliminar</a
+              >
             </td>
           </tr>
           {% endfor %}
@@ -66,7 +97,10 @@
             <span class="student-icon"
               ><i class="bi bi-calendar-event"></i
             ></span>
-            <a href="{% url 'detalle_curso' curso.id %}" class="doc-link">
+            <a
+              href="{% url 'cursos:detalle_curso' curso.id %}"
+              class="doc-link"
+            >
               {{ curso.codigo }}
             </a>
           </div>

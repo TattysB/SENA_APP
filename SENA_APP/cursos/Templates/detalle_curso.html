@@ -23,7 +23,7 @@
           </div>
           <div class="ms-auto d-none d-md-flex gap-2">
             <a
-              href="{% url 'lista_cursos' %}"
+              href="{% url 'cursos:lista_cursos' %}"
               class="btn btn-outline-secondary btn-sm"
               >← Volver a la lista</a
             >
@@ -96,7 +96,7 @@
                     <tbody>
                       {% for instructor_curso in instructores_curso %}
                       <tr>
-                        <td><a href="{% url 'detalle_instructor' instructor_curso.instructor.id %}" class="table-link">{{ instructor_curso.instructor.nombre }} {{ instructor_curso.instructor.apellido }}</a></td>
+                        <td><a href="{% url 'instructores:detalle_instructor' instructor_curso.instructor.id %}" class="table-link">{{ instructor_curso.instructor.nombre }} {{ instructor_curso.instructor.apellido }}</a></td>
                         <td>{{ instructor_curso.rol }}</td>
                         <td>{{ instructor_curso.instructor.especialidad|default:"—" }}</td>
                       </tr>
@@ -139,7 +139,7 @@
                     <tbody>
                       {% for aprendiz_curso in aprendices_curso %}
                       <tr>
-                        <td><a href="{% url 'detalle_aprendiz' aprendiz_curso.aprendiz.id %}" class="table-link">{{ aprendiz_curso.aprendiz.firstname }} {{ aprendiz_curso.aprendiz.lastname }}</a></td>
+                        <td><a href="{% url 'aprendices:detalle_aprendiz' aprendiz_curso.aprendiz.id %}" class="table-link">{{ aprendiz_curso.aprendiz.firstname }} {{ aprendiz_curso.aprendiz.lastname }}</a></td>
                         <td>{{ aprendiz_curso.aprendiz.document_id }}</td>
                         <td>{% if aprendiz_curso.aprendiz.email %}<a href="mailto:{{ aprendiz_curso.aprendiz.email }}">{{ aprendiz_curso.aprendiz.email }}</a>{% else %}<span class="text-muted">—</span>{% endif %}</td>
                       </tr>

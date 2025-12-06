@@ -1,0 +1,100 @@
+{% extends 'master.html' %} {% block title %} Eliminar Curso - SENA APP
+{%endblock %} {% block content %}
+
+<div class="row justify-content-center mt-5">
+  <div class="col-md-6">
+    <div class="card shadow border-danger">
+      <div class="card-header bg-danger text-white">
+        <h3 class="card-title mb-0">
+          <i class="bi bi-exclamation-triangle"></i> Confirmar Eliminación
+        </h3>
+      </div>
+      <div class="card-body">
+        <div class="alert alert-warning">
+          <i class="bi bi-exclamation-triangle-fill"></i>
+          <strong>¡Atención!</strong> Esta acción no se puede deshacer.
+        </div>
+
+        <p class="lead">¿Está seguro que desea eliminar el siguiente curso?</p>
+
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">{{ object.nombre }}</h5>
+            <p class="card-text">
+              <strong>Código:</strong> {{ object.codigo }}<br />
+              <strong>Programa:</strong> {{ object.programa }}<br />
+              <strong>Coordinador:</strong> {{ object.instructor_coordinador}}<br />
+              <strong>Estado:</strong> {{ object.get_estado_display }}
+            </p>
+          </div>
+        </div>
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <a
+            href="{% url 'cursos:lista_cursos' %}"
+            class="btn btn-secondary me-md-2"
+          >
+            <i class="bi bi-x-circle"></i> Cancelar
+          </a>
+          <button
+            type="button"
+            class="btn btn-danger"
+            data-bs-toggle="modal"
+            data-bs-target="#confirmDeleteModal"
+          >
+            <i class="bi bi-trash"></i> Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Confirmación -->
+<div
+  class="modal fade"
+  id="confirmDeleteModal"
+  tabindex="-1"
+  aria-labelledby="confirmDeleteLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-danger">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="confirmDeleteLabel">
+          <i class="bi bi-exclamation-triangle-fill"></i> Confirmar Eliminación
+        </h5>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p class="mb-3">
+          <strong
+            >¿Realmente desea eliminar el curso {{ object.nombre }}?</strong
+          >
+        </p>
+        <div class="alert alert-danger" role="alert">
+          <i class="bi bi-exclamation-circle-fill"></i> Esta acción es
+          permanente y no se puede deshacer.
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          <i class="bi bi-x-circle"></i> Cancelar
+        </button>
+        <form method="post" style="display: inline">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">
+            <i class="bi bi-trash"></i> Sí, Eliminar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

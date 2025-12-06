@@ -1,0 +1,161 @@
+{% extends 'master.html' %} {% block title %} Agregar Curso - SENA APP {%endblock %} {% block content %}
+
+<div class="row justify-content-center mt-4">
+  <div class="col-md-8">
+    <div class="card shadow-sm">
+      <div
+        class="card-header bg-success text-white d-flex align-items-center justify-content-between"
+      >
+        <div>
+          <h4 class="mb-0"><i class="bi bi-plus-lg me-2"></i> Agregar Curso</h4>
+          <small class="text-white-50">Crea un nuevo registro de curso</small>
+        </div>
+        <div>
+          <a
+            href="{% url 'cursos:lista_cursos' %}"
+            class="btn btn-sm btn-light text-success"
+          >
+            <i class="bi bi-x-circle"></i> Cancelar
+          </a>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <form method="post" novalidate>
+          {% csrf_token %} {% if form.non_field_errors %}
+          <div class="alert alert-danger">{{ form.non_field_errors }}</div>
+          {% endif %}
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label"
+                >{{ form.codigo.label }}
+                <span class="text-danger">*</span></label
+              >
+              {{ form.codigo }} {% if form.codigo.errors %}
+              <div class="text-danger small mt-1">{{ form.codigo.errors }}</div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label"
+                >{{ form.nombre.label }}
+                <span class="text-danger">*</span></label
+              >
+              {{ form.nombre }} {% if form.nombre.errors %}
+              <div class="text-danger small mt-1">{{ form.nombre.errors }}</div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label"
+                >{{ form.programa.label }}
+                <span class="text-danger">*</span></label
+              >
+              {{ form.programa }} {% if form.programa.errors %}
+              <div class="text-danger small mt-1">{{ form.programa.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">{{ form.instructor_coordinador.label }}
+                <span class="text-danger">*</span></label>
+              {{ form.instructor_coordinador }} {% if form.instructor_coordinador.errors %}
+              <div class="text-danger small mt-1">
+                {{ form.instructor_coordinador.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label"
+                >{{ form.fecha_inicio.label }}
+                <span class="text-danger">*</span></label
+              >
+              {{ form.fecha_inicio }} {% if form.fecha_inicio.errors %}
+              <div class="text-danger small mt-1">
+                {{ form.fecha_inicio.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label"
+                >{{ form.fecha_fin.label }}
+                <span class="text-danger">*</span></label
+              >
+              {{ form.fecha_fin }} {% if form.fecha_fin.errors %}
+              <div class="text-danger small mt-1">
+                {{ form.fecha_fin.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label"
+                >{{ form.horario.label }}
+                <span class="text-danger">*</span></label
+              >
+              {{ form.horario }} {% if form.horario.errors %}
+              <div class="text-danger small mt-1">
+                {{ form.horario.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label"
+                >{{ form.aula.label }} <span class="text-danger">*</span></label
+              >
+              {{ form.aula }} {% if form.aula.errors %}
+              <div class="text-danger small mt-1">{{ form.aula.errors }}</div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label"
+                >{{ form.cupos_maximos.label }}
+                <span class="text-danger">*</span></label
+              >
+              {{ form.cupos_maximos }} {% if form.cupos_maximos.errors %}
+              <div class="text-danger small mt-1">
+                {{ form.cupos_maximos.errors }}
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">{{ form.estado.label }}</label>
+              {{ form.estado }} {% if form.estado.errors %}
+              <div class="text-danger small mt-1">{{ form.estado.errors }}</div>
+              {% endif %}
+            </div>
+
+            <div class="col-12">
+              <label class="form-label">{{ form.observaciones.label }}</label>
+              {{ form.observaciones }} {% if form.observaciones.errors %}
+              <div class="text-danger small mt-1">
+                {{ form.observaciones.errors }}
+              </div>
+              {% endif %}
+            </div>
+          </div>
+
+          <div class="mt-4 d-flex justify-content-end gap-2">
+            <a
+              href="{% url 'cursos:lista_cursos' %}"
+              class="btn btn-outline-secondary"
+              >Cancelar</a
+            >
+            <button type="submit" class="btn btn-success">
+              <i class="bi bi-save me-1"></i> Guardar Curso
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
