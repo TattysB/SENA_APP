@@ -1,12 +1,11 @@
-{% extends "master.html" %}
-{% block title %}Detalle del Programa - {{ programa_detalle.nombre }}{% endblock %}
-
-{% block content %}
+{% extends "master.html" %} {% block title %}Detalle del Programa - {{programa_detalle.nombre }}{% endblock %} {% block content %}
 <div class="card shadow-sm my-4 detalle-aprendiz-card">
   <div class="card-body p-4">
     <div class="row g-3 align-items-center">
       <div class="col-auto">
-        <div class="avatar rounded-3 d-flex align-items-center justify-content-center">
+        <div
+          class="avatar rounded-3 d-flex align-items-center justify-content-center"
+        >
           <i class="bi bi-book-half"></i>
         </div>
       </div>
@@ -15,57 +14,95 @@
         <h2 class="h4 mb-1">{{ programa_detalle.nombre }}</h2>
         <div class="small text-muted">
           Código: {{ programa_detalle.codigo }}
-          <span class="badge program-badge">{{ programa_detalle.get_nivel_formacion_display }}</span>
+          <span class="badge program-badge"
+            >{{ programa_detalle.get_nivel_formacion_display }}</span
+          >
         </div>
       </div>
 
       <div class="col-auto text-end">
-        <a href="{% url 'programas' %}" class="btn btn-sm btn-outline-secondary">← Volver a la lista</a>
+        <a
+          href="{% url 'programas:programas' %}"
+          class="btn btn-sm btn-outline-secondary"
+          >← Volver a la lista</a
+        >
       </div>
     </div>
 
-    <hr class="my-3">
+    <hr class="my-3" />
 
     <div class="row">
       <div class="col-md-6">
         <ul class="list-unstyled mb-3 info-list">
-          <li><strong>Nivel de Formación:</strong> {{ programa_detalle.get_nivel_formacion_display }}</li>
-          <li><strong>Modalidad:</strong> {{ programa_detalle.get_modalidad_display }}</li>
-          <li><strong>Duración:</strong> {{ programa_detalle.duracion_meses }} meses ({{ programa_detalle.duracion_horas }} horas)</li>
-          <li><strong>Estado:</strong> <span class="badge bg-{{ programa_detalle.estado|lower }}">{{ programa_detalle.get_estado_display }}</span></li>
+          <li>
+            <strong>Nivel de Formación:</strong> {{programa_detalle.get_nivel_formacion_display }}
+          </li>
+          <li>
+            <strong>Modalidad:</strong> {{programa_detalle.get_modalidad_display }}
+          </li>
+          <li>
+            <strong>Duración:</strong> {{ programa_detalle.duracion_meses }}
+            meses ({{ programa_detalle.duracion_horas }} horas)
+          </li>
+          <li>
+            <strong>Estado:</strong>
+            <span class="badge bg-{{ programa_detalle.estado|lower }}"
+              >{{ programa_detalle.get_estado_display }}</span
+            >
+          </li>
         </ul>
       </div>
 
       <div class="col-md-6">
         <ul class="list-unstyled mb-3 info-list">
-          <li><strong>Centro de Formación:</strong> {{ programa_detalle.centro_formacion }}</li>
+          <li>
+            <strong>Centro de Formación:</strong> {{programa_detalle.centro_formacion }}
+          </li>
           <li><strong>Regional:</strong> {{ programa_detalle.regional }}</li>
-          <li><strong>Fecha de Creación:</strong> {{ programa_detalle.fecha_creacion|date:"d \\d\\e F Y" }}</li>
-          <li><strong>Fecha de Registro:</strong> {{ programa_detalle.fecha_registro|date:"d \\d\\e F Y H:i" }}</li>
+          <li>
+            <strong>Fecha de Creación:</strong> 
+            {{ programa_detalle.fecha_creacion|date:"d \\d\\e F Y" }}
+          </li>
+          <li>
+            <strong>Fecha de Registro:</strong> {{ programa_detalle.fecha_registro|date:"d \\d\\e F Y H:i" }}
+          </li>
         </ul>
       </div>
     </div>
-    
-    <hr class="my-3">
+
+    <hr class="my-3" />
 
     <div class="row">
-        <div class="col-12">
-            <h5 class="mt-3">Descripción</h5>
-            <p>{{ programa_detalle.descripcion|default:"No se ha proporcionado una descripción." }}</p>
+      <div class="col-12">
+        <h5 class="mt-3">Descripción</h5>
+        <p>
+          {{ programa_detalle.descripcion|default:"No se ha proporcionado una
+          descripción." }}
+        </p>
 
-            <h5 class="mt-3">Competencias a Desarrollar</h5>
-            <p>{{ programa_detalle.competencias|default:"No se han listado competencias." }}</p>
+        <h5 class="mt-3">Competencias a Desarrollar</h5>
+        <p>
+          {{ programa_detalle.competencias|default:"No se han listado competencias." }}
+        </p>
 
-            <h5 class="mt-3">Perfil de Egreso</h5>
-            <p>{{ programa_detalle.perfil_egreso|default:"No se ha definido el perfil de egreso." }}</p>
+        <h5 class="mt-3">Perfil de Egreso</h5>
+        <p>
+          {{ programa_detalle.perfil_egreso|default:"No se ha definido el perfilde egreso." }}
+        </p>
 
-            <h5 class="mt-3">Requisitos de Ingreso</h5>
-            <p>{{ programa_detalle.requisitos_ingreso|default:"No se han especificado requisitos." }}</p>
-        </div>
+        <h5 class="mt-3">Requisitos de Ingreso</h5>
+        <p>
+          {{ programa_detalle.requisitos_ingreso|default:"No se han especificado requisitos." }}
+        </p>
+      </div>
     </div>
 
     <div class="mt-4 d-flex flex-wrap gap-2">
-      <a href="{% url 'programas' %}" class="btn btn-outline-secondary btn-sm">Ver lista</a>
+      <a
+        href="{% url 'programas:programas' %}"
+        class="btn btn-outline-secondary btn-sm"
+        >Ver lista</a
+      >
       <a href="#" class="btn btn-outline-success btn-sm">Editar Programa</a>
     </div>
   </div>

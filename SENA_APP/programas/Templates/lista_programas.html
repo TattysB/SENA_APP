@@ -1,90 +1,123 @@
-{% extends 'master.html' %} 
-{% block title %}Lista de Programas de Formación{% endblock %}
-{% block content %}
-{% load static %}
+{% extends 'master.html' %} {% block title %} Lista de Programas de Formación {%endblock %} {% block content %} {% load static %}
+
 <div class="row mt-4">
   <div class="col-12">
     <link rel="stylesheet" href="{% static 'mystyles.css' %}" />
-    
-    <div class="section-header mb-4">
-      <h2 class="section-title">
-        <i class="bi bi-book-fill me-2"></i> Programas de Formación
-      </h2>
-      <p class="section-sub">
-        Listado de todos los programas de formación disponibles.
-      </p>
+
+    <!-- Título moderno + acción Agregar -->
+    <div
+      class="section-header mb-4 d-flex justify-content-between align-items-start"
+    >
+      <div>
+        <h2 class="section-title">
+          <i class="bi bi-book-fill me-2"></i> Programas de Formación
+        </h2>
+        <p class="section-sub">
+          Listado de todos los programas de formación disponibles.
+        </p>
+      </div>
+      <div>
+        <a
+          href="{% url 'programas:crear_programa' %}"
+          class="btn btn-success btn-sm"
+        >
+          <i class="bi bi-plus-lg"></i> Agregar Programa
+        </a>
+      </div>
     </div>
-    
+
     {% if programas %}
-    
-        <div class="table-responsive d-none d-md-block">
-          <table class="table table-modern table-hover align-middle">
-            <thead>
-              <tr>
-                <th>Código</th>
-                <th>Nombre del Programa</th>
-                <th>Nivel</th>
-                <th>Duración (Meses)</th>
-                <th>Estado</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for programa in programas %}
-              <tr>
-                <td>
-                  <a
-                    class="table-link"
-                    href="{% url 'detalle_programa' programa.id %}"
-                  >
-                    {{ programa.codigo }}
-                  </a>
-                </td>
-                <td>{{ programa.nombre }}</td>
-                <td>{{ programa.get_nivel_formacion_display }}</td>
-                <td>{{ programa.duracion_meses }}</td>
-                <td>
-                 
-                  <span class="badge bg-{{ programa.estado|lower }} text-success">{{ programa.get_estado_display }}</span>
-                </td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
 
-        <div class="d-block d-md-none mt-3">
-          <div class="card-grid">
-            {% for programa in programas %}
-            <div class="apprentice-card">
-              <div class="card-header-row">
-                <span class="student-icon"><i class="bi bi-folder-fill"></i></span>
-                <a href="{% url 'detalle_programa' programa.id %}" class="doc-link">
-                  {{ programa.codigo }}
-                </a>
-              </div>
+    <div class="table-responsive d-none d-md-block">
+      <table class="table table-modern table-hover align-middle">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Nombre del Programa</th>
+            <th>Nivel</th>
+            <th>Duración (Horas)</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for programa in programas %}
+          <tr>
+            <td>
+              <a
+                class="table-link"
+                href="{% url 'programas:detalle_programa' programa.id %}"
+              >
+                {{ programa.codigo }}
+              </a>
+            </td>
+            <td>{{ programa.nombre }}</td>
+            <td>{{ programa.get_nivel_formacion_display }}</td>
+            <td>{{ programa.duracion_horas }}</td>
+            <td>
+              <span class="badge bg-{{ programa.estado|lower }} text-success"
+                >{{ programa.get_estado_display }}</span
+              >
+            </td>
+            <td>
+              <a
+                href="{% url 'programas:detalle_programa' programa.id %}"
+                class="btn btn-sm btn-outline-secondary me-1"
+                >Ver</a
+              >
+              <a
+                href="{% url 'programas:editar_programa' programa.id %}"
+                class="btn btn-sm btn-outline-warning me-1"
+                >Editar</a
+              >
+              <a
+                href="{% url 'programas:eliminar_programa' programa.id %}"
+                class="btn btn-sm btn-outline-danger"
+                >Eliminar</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
 
-              <div class="card-title">
-                {{ programa.nombre }}
-              </div>
+    <div class="d-block d-md-none mt-3">
+      <div class="card-grid">
+        {% for programa in programas %}
+        <div class="apprentice-card">
+          <div class="card-header-row">
+            <span class="student-icon"><i class="bi bi-folder-fill"></i></span>
+            <a
+              href="{% url 'programas:detalle_programa' programa.id %}"
+              class="doc-link"
+            >
+              {{ programa.codigo }}
+            </a>
+          </div>
 
-                <div class="card-program">
-                <i class="bi bi-layers-fill me-1"></i> {{ programa.get_nivel_formacion_display }}
-                | <span class="badge bg-{{ programa.estado|lower }} text-success">{{ programa.get_estado_display }}</span>
-              </div>
-            </div>
-            {% endfor %}
+          <div class="card-title">{{ programa.nombre }}</div>
+
+          <div class="card-program">
+            <i class="bi bi-layers-fill me-1"></i> {{
+            programa.get_nivel_formacion_display }} |
+            <span class="badge bg-{{ programa.estado|lower }} text-success"
+              >{{ programa.get_estado_display }}</span
+            >
           </div>
         </div>
+        {% endfor %}
+      </div>
+    </div>
 
     {% else %}
-    
-      <div class="no-data text-center p-5 border rounded">
-        <i class="bi bi-exclamation-octagon-fill fs-3 text-warning"></i>
-        <p class="mt-2">No hay programas de formación registrados.</p>
-      </div>
-      
+
+    <div class="no-data text-center p-5 border rounded">
+      <i class="bi bi-exclamation-octagon-fill fs-3 text-warning"></i>
+      <p class="mt-2">No hay programas de formación registrados.</p>
+    </div>
+
     {% endif %}
-    
   </div>
 </div>
 {% endblock %}
